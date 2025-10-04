@@ -1,4 +1,5 @@
 import { Leagues } from "@/types/leagues";
+import { SeasonBadges } from "@/types/seasonBadges";
 
 const API_BASE_URL = "https://www.thesportsdb.com/api/v1/json/3";
 
@@ -37,5 +38,20 @@ export const leaguesApi = {
     });
 
     return { leagues: filtered };
+  },
+};
+
+export const seasonBadgesApi = {
+  getSeasonBadges: async (leagueId: string): Promise<SeasonBadges> => {
+    const response = await fetch(
+      `${API_BASE_URL}/search_all_seasons.php?badge=1&id=${leagueId}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch season badges");
+    }
+
+    const data = await response.json();
+    return data;
   },
 };
