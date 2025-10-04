@@ -1,4 +1,4 @@
-type League = {
+export type League = {
   idLeague: string;
   strLeague: string;
   strSport: string;

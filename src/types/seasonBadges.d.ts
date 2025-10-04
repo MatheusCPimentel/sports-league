@@ -1,4 +1,4 @@
-type SeasonBadge = {
+export type SeasonBadge = {
   strSeasonBadge: string;
   strBadge: string;
 };
