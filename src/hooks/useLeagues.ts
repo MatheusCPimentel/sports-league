@@ -13,7 +13,6 @@ export const useSearchLeagues = (query: string, sport: string) => {
   return useQuery({
     queryKey: ["leagues", "search", query, sport],
     queryFn: () => leaguesApi.searchLeagues(query, sport),
-    enabled: true,
     staleTime: 2 * 60 * 1000, // Cache for 2 minutes
   });
 };
