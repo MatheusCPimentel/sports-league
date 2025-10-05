@@ -65,16 +65,16 @@ export const BadgeModal = ({
             )}
           </div>
 
-          <div className="w-full flex justify-center items-center min-h-[200px]">
+          <div className="flex justify-center items-center h-[350px]">
             {isLoading ? (
               <div className="text-gray-600">Loading badge...</div>
             ) : badgeUrl ? (
-              <div className="relative w-full h-[400px]">
+              <div className="relative w-full">
                 <Image
                   src={badgeUrl}
+                  width={300}
+                  height={300}
                   alt={`${leagueName} ${season || ""} badge`}
-                  fill
-                  className="object-contain"
                   unoptimized
                 />
               </div>
