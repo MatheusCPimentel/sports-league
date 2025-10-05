@@ -4,12 +4,16 @@ import { useState, useMemo } from "react";
 import { SportCard } from "./components/SportCard";
 import { SearchBar } from "./components/SearchBar";
 import { Dropdown } from "./components/Dropdown";
+import { BadgeModal } from "./components/BadgeModal";
 import { useAllLeagues, useSearchLeagues } from "@/hooks/useLeagues";
+import { useSeasonBadges } from "@/hooks/useSeasonBadges";
 import { useDebounce } from "@/hooks/useDebounce";
 
 export default function Home() {
   const [searchValue, setSearchValue] = useState("");
   const [sportFilter, setSportFilter] = useState("All Sports");
+  const [selectedLeagueId, setSelectedLeagueId] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const debouncedSearchValue = useDebounce(searchValue, 500);
 
@@ -35,6 +39,20 @@ export default function Home() {
   const filteredLeagues = searchData?.leagues || [];
 
   const hasToShowLoading = isFetching || searchValue !== debouncedSearchValue;
+
+  const { data: badgeData, isLoading: isBadgeLoading } =
+    useSeasonBadges(selectedLeagueId);
+
+  const selectedLeague = filteredLeagues.find(
+    (league) => league.idLeague === selectedLeagueId
+  );
+
+  const firstBadge = badgeData?.seasons?.[0];
+
+  const handleCardClick = (leagueId: string) => {
+    setSelectedLeagueId(leagueId);
+    setIsModalOpen(true);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4">
@@ -75,7 +93,11 @@ export default function Home() {
             {filteredLeagues.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredLeagues.map((league) => (
-                  <SportCard key={league.idLeague} {...league} />
+                  <SportCard
+                    key={league.idLeague}
+                    {...league}
+                    onClick={handleCardClick}
+                  />
                 ))}
               </div>
             ) : (
@@ -88,6 +110,15 @@ export default function Home() {
           </>
         )}
       </div>
+
+      <BadgeModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        badgeUrl={firstBadge?.strBadge || null}
+        leagueName={selectedLeague?.strLeague}
+        season={firstBadge?.strSeason}
+        isLoading={isBadgeLoading}
+      />
     </div>
   );
 }
