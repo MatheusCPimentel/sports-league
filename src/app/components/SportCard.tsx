@@ -16,17 +16,17 @@ export const SportCard = ({
   return (
     <div
       onClick={() => onClick(idLeague)}
-      className="bg-white rounded-xl shadow-lg hover:shadow-xl p-6 border-2 border-transparent transition-all duration-300 hover:border-blue-100 cursor-pointer"
+      className="h-[200px] bg-white rounded-xl shadow-lg hover:shadow-xl p-6 border-2 border-transparent transition-all duration-300 hover:border-blue-100 cursor-pointer"
     >
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-4 justify-between h-full">
         <div>
           <h2 className="text-2xl font-bold text-gray-900 mb-1">{strLeague}</h2>
 
-          {strLeagueAlternate && (
-            <p className="text-sm text-gray-500 italic">
-              Also known as: {strLeagueAlternate}
-            </p>
-          )}
+          <p className="text-sm text-gray-500 italic">
+            {strLeagueAlternate
+              ? `Also known as: ${strLeagueAlternate}`
+              : "No alternate name"}
+          </p>
         </div>
 
         <div className="flex items-center space-x-2">
