@@ -15,11 +15,13 @@ A modern, responsive web application for exploring sports leagues from around th
 
 ### Desktop View
 
-![Desktop View](https://github.com/tobeadded)
+![Desktop View](https://github.com/user-attachments/assets/d6ae8b00-a502-49f1-85ec-5122bec68ebf)
 
 ### Mobile View
 
-![Mobile View](https://github.com/tobeadded)
+![Mobile View](https://github.com/user-attachments/assets/311e83e8-53be-4f68-a399-14c24b1256f2)
+
+
 
 ## 🚀 Getting Started
 
