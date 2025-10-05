@@ -1,5 +1,5 @@
 export type SeasonBadge = {
-  strSeasonBadge: string;
+  strSeason: string;
   strBadge: string;
 };
 
